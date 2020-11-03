@@ -1,10 +1,10 @@
 
 exports.up = function(knex) {
  return knex.schema.createTable('user',function(table){
-    table.increments();
-      table.string('login').unique();
-      table.string('password');   
-    
+  table.string('name').notNullable();
+  table.string('email').primary();
+  table.string('telefone').notNullable();
+  table.string('senha').notNullable()
   });
 };
 

@@ -1,7 +1,7 @@
 {
   "name": "back-and",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "index.js",
   "engines": {
     "node": "12.16.1"
@@ -25,5 +25,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joseferreira01/PDM-back-and.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joseferreira01/PDM-back-and/issues"
+  },
+  "homepage": "https://github.com/joseferreira01/PDM-back-and#readme"
 }

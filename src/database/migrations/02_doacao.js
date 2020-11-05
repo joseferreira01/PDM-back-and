@@ -3,6 +3,7 @@ exports.up = function(knex) {
         table.string('id').primary();
         table.string('valor').notNullable();
         table.string('email_ong').notNullable();
+        table.foreing('email_ong').references('email').inTable('ong')
         
     })
   };

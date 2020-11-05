@@ -15,7 +15,7 @@ module.exports = {
                 }).select('email', 'senha');
 
             if (user.length === 0) {
-                throw new Error('Incorrect login')
+                throw new Error('Incorrect email')
             }
 
             const isSamePassword = await bcrypt.compare(senha, usuario[0].senha)
@@ -23,17 +23,17 @@ module.exports = {
             if (isSamePassword) {
                 const token = jwt.sign({
                     email: usuario.email,
-                    login: login
+                   
                 }, 'dados', {
                     expiresIn: '1h'
                 })
 
                 return response.json(token);
             }
-            throw new Error('Incorrect password')
+            throw new Error('Incorrect senha')
         } catch (err) {
-            if (err.message === 'Incorrect login' || err.message === 'Incorrect password') {
-                return response.status(400).json(err.message);
+            if (err.usuario === 'Incorrect email' || err.usuario === 'Incorrect senha') {
+                return response.status(400).json(err.usuario);
             }
             return response.status(400).json('Error in the data expected for request!');
         }

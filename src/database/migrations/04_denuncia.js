@@ -11,8 +11,9 @@ exports.up = function(knex) {
         table.string('cidade').notNullable();
         table.string('numero').notNullable();
         table.string('usuario_email').notNullable();
-        table.string('ong_email').notNullable()
-        
+        table.string('ong_email').notNullable();
+        table.foreign('usuario_email').references('usuario.email');
+        table.foreign('ong_email').references('ong.email')
     })
   };
   

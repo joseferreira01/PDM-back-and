@@ -13,7 +13,7 @@ module.exports = {
         const  date_token = date.getTime();
            
          try{
-              await  conection('user').
+              await  conection('usuario').
           
             where('email','=',email).
       

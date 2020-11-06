@@ -1,13 +1,13 @@
 const express = require('express');
-const routes = express.Router();
-const contact = require('./controller/MessageController')
-const sessions = require('./controller/sessions')
+
+const contact = require('./controller/ongController')
+
 const userController = require('./controller/UserController')
 const login = require('../src/ middleware/login');
-
+const sessions = require('./controller/sessions')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
-
+const routes = express.Router();
 
 routes.post('/users/login',celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -56,5 +56,19 @@ routes.delete('/contact/:id',login,celebrate({
     })
 }),contact.delete);
 
-module.exports = routes;
 //f
+
+routes.post('/ong',celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        name: Joi.string().required().min(5).max(50),
+        email: Joi.string().required().email(),
+        telefone: Joi.string().required().min(11).max(11),
+        descricao: Joi.string().required().min(10).max(100),
+        uf: Joi.string().required().min(2).max(2),
+        bairo: Joi.string().required().min(5),
+        cidade: Joi.string().required().min(5),
+        numero: Joi.number().integer().required()
+    })
+}),sessions.login);
+
+module.exports = routes;

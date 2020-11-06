@@ -8,7 +8,7 @@ exports.up = function(knex) {
         table.string('bairo').notNullable();
         table.string('rua').notNullable();
         table.string('cidade').notNullable();
-        table.string('numero').notNullable();
+        table.integer('numero').notNullable()
     })
   };
   

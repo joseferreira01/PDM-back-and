@@ -54,7 +54,7 @@ module.exports = {
             }).catch(err =>{
               return  response.status(404).json({err:err});
             });
-       
+
           
     },
     

@@ -6,40 +6,34 @@ module.exports = {
   
      
     async index(request, response, next){ 
-    //  return  response.json({nome:'jose'});
+    
         const {page = 1} = request.query;
-        const [count] = await conection('message').count();
+        const [count] = await conection('ong').count();
         
-       const message = await conection('message').limit(10).
+       const ong = await conection('ong').limit(10).
        offset((page -1)*10).
        select('*');
        response.header('X-Total-Count',count['count(*)']);
-        response.json({message})
+       return response.json({ong})
+      
     },
     async findOne(request, response, next){
         const {id} =  request.params;
-        const message = await conection('message').
+        const ong = await conection('ong').
         where('id',id).select('*');
-         response.json({message})
+         response.json({ong})
      },
 
     async create(request, response){
      
-        const { name, email,whatsapp } = request.body;
-        
-      const status = 'Unread';
-      var newdate = new Date();
-      const date = newdate.getTime();
-      const result = await conection('message').insert({
-            name,
-            email, 
-            whatsapp,
-            date,
-            status
+      const { name, email,telefone, descricao, uf,bairo,rua,cidade,numero} = request.body;
+
+      const result = await conection('ong').insert({
+        name, email,telefone, descricao, uf,bairo,rua,cidade,numero
         }).then(message =>{
           return  response.status(200).json({success:'success'});
         }).catch(err =>{
-          console.log('err create message',err);
+          console.log('err create ong',err);
           next(err);
           return  response.status(201).json({error:err});
         });
@@ -48,9 +42,9 @@ module.exports = {
     },
     async delete(request, response, next){
        
-            const id = request.params;
+            const id = request.params.id;
       
-            await conection('message').where('id',id)
+            await conection('ong').where('id',id)
             .delete().then(message => {
 
               return  response.status(200).json({success:'success'});

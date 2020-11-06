@@ -8,11 +8,11 @@ module.exports = {
     async index(request, response, next){ 
     //  return  response.json({nome:'jose'});
         const {page = 1} = request.query;
-        const [count] = await conection('user').count();
+        const [count] = await conection('doacao').count();
         
-       const message = await conection('user').limit(10).
+       const message = await conection('doacao').limit(10).
        offset((page -1)*10).
-       select('id','login', 'password');
+       select('id','email_ong', 'valor');
        response.header('X-Total-Count',count['count(*)']);
         response.json({message})
     },
@@ -25,13 +25,13 @@ module.exports = {
 
     async create(request, response, next){
      
-        const { login } = request.body;
+        const {valor,email_ong, email_usuario } = request.body;
       
         const password = bcrypt.hashSync(request.body.password, 10)
 
-      const result = await conection('user').insert({
-          login,
-          password
+      const result = await conection('doacao').insert({
+          valor,
+          email_ong
         }).then(message =>{
           return  response.status(200).json({success:'success'});
         }).catch(err =>{
@@ -44,7 +44,7 @@ module.exports = {
        
             const id = request.params;
       
-            await conection('user').where('id',id)
+            await conection('doacao').where('id',id)
             .delete().then(message => {
 
               return  response.status(200).json({success:'success'});

@@ -6,34 +6,34 @@ const jwt = require('jsonwebtoken')
 module.exports = {
 
     async login(request, response) {
-        const { login, password } = request.body;
+        const { email, senha } = request.body;
 
         try {
-            const user = await conection('user')
+            const usuario = await conection('usuario')
                 .where({
-                    login: login,
-                }).select('id', 'password');
+                    email: email,
+                }).select('email', 'senha');
 
             if (user.length === 0) {
-                throw new Error('Incorrect login')
+                throw new Error('Incorrect email')
             }
 
-            const isSamePassword = await bcrypt.compare(password, user[0].password)
+            const isSamePassword = await bcrypt.compare(senha, usuario[0].senha)
 
             if (isSamePassword) {
                 const token = jwt.sign({
-                    id: user.id,
-                    login: login
+                    email: usuario.email,
+                   
                 }, 'dados', {
                     expiresIn: '1h'
                 })
 
                 return response.json(token);
             }
-            throw new Error('Incorrect password')
+            throw new Error('Incorrect senha')
         } catch (err) {
-            if (err.message === 'Incorrect login' || err.message === 'Incorrect password') {
-                return response.status(400).json(err.message);
+            if (err.usuario === 'Incorrect email' || err.usuario === 'Incorrect senha') {
+                return response.status(400).json(err.usuario);
             }
             return response.status(400).json('Error in the data expected for request!');
         }

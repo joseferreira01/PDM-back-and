@@ -9,47 +9,49 @@ const { celebrate, Joi, errors, Segments } = require('celebrate');
 
 
 
-routes.post('/users/login',celebrate({
+routes.post('/usuario/senha',celebrate({
     [Segments.BODY]: Joi.object().keys({
-        password: Joi.string().required().min(8).max(16),
-        login: Joi.string().required(),
+        senha: Joi.string().required().min(8).max(16),
+        email: Joi.string().required(),
       
     })
 }),sessions.login);
 
-routes.post('/users/',celebrate({
+routes.post('/usuario/',celebrate({
     [Segments.BODY]: Joi.object().keys({
-        login: Joi.string().required().min(4).max(60),
-        password: Joi.string().required().min(8).max(16)
+        nome: Joi.string().required().min(4).max(60),
+        telefone: Joi.string().required().min(4).max(60),
+        email: Joi.string().required().email,
+        senha: Joi.string().required().min(8).max(16)
      
       
     })
 }),userController.create);
-routes.get('/users',userController.index);
+routes.get('/usuario',userController.index);
 
-routes.get('/users/:id',userController.findOne);
+routes.get('/usuario/:email',userController.findOne);
 
 
 // Routes to contact
-routes.get('/contact',contact.index);
+routes.get('/contato',contact.index);
 
-routes.get('/contact/:id',celebrate({
+routes.get('/contato/:email',celebrate({
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required(),
       
     })
 }),contact.findOne);
 
-routes.post('/contact',celebrate({
+routes.post('/contato',celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required().min(10).max(60),
         email: Joi.string().required().email(),
-        whatsapp: Joi.string().required().min(10).max(11)
+        telefone: Joi.string().required().min(10).max(11)
        
     })
 }),contact.create);
 
-routes.delete('/contact/:id',login,celebrate({
+routes.delete('/contato/:email',email,celebrate({
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required(),
       

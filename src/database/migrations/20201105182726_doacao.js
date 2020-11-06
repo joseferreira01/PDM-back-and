@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('doacao', function (table) {
-        table.string('id').primary();
+        table.increments()
         table.string('valor').notNullable();
         table.string('email_ong').notNullable();
         table.foreign('email_ong').references('ong.email')

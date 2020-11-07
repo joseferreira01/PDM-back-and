@@ -14,7 +14,7 @@ module.exports = {
                     email: email,
                 }).select('email', 'senha');
 
-            if (user.length === 0) {
+            if (!usuario) {
                 throw new Error('Incorrect email')
             }
 
@@ -35,7 +35,7 @@ module.exports = {
             if (err.usuario === 'Incorrect email' || err.usuario === 'Incorrect senha') {
                 return response.status(400).json(err.usuario);
             }
-            return response.status(400).json('Error in the data expected for request!');
+            return response.status(400).json('Error in the data expected for !');
         }
 
     },

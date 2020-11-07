@@ -28,9 +28,9 @@ module.exports = {
      
       const { name, email,telefone, descricao, uf,bairo,rua,cidade,numero} = request.body;
       const senha = bcrypt.hashSync(request.body.senha, 10)
-      const result = await conection('ong').insert({
+      const result = await conection('ong').insert([{
         name, email,telefone, descricao, uf,bairo,rua,cidade,numero,senha
-        }).then(message =>{
+        }]).then(message =>{
           return  response.status(200).json({success:'success'});
         }).catch(err =>{
           console.log('err create ong',err);

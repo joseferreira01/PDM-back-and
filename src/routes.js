@@ -3,6 +3,7 @@ const express = require('express');
 const contact = require('./controller/ongController')
 
 const userController = require('./controller/UserController')
+const ongController = require('./controller/ongController')
 const login = require('../src/ middleware/login');
 const sessions = require('./controller/sessions')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
@@ -45,6 +46,7 @@ routes.post('/ong',celebrate({
         cidade: Joi.string().required().min(5),
         numero: Joi.number().integer().required()
     })
-}),sessions.login);
+}),ongController.create);
+
 
 module.exports = routes;

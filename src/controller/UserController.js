@@ -29,12 +29,12 @@ module.exports = {
       
         const senha = bcrypt.hashSync(request.body.senha, 10)
 
-      const result = await conection('usuario').insert({
+      const result = await conection('usuario').insert([{
           nome,
           email,
           telefone,
           senha
-        }).then(message =>{
+        }]).then(message =>{
           return  response.status(200).json({success:'success'});
         }).catch(err =>{
           return  response.status(201).json({error:err});

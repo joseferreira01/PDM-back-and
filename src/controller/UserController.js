@@ -19,7 +19,7 @@ module.exports = {
     async findOne(request, response,next){
         const {email} =  request.params;
         const usuario = await conection('usuario').
-        where('email',email).select('email','senha');
+        where('email',email).select('email','telefone');
          response.json({usuario})
      },
 

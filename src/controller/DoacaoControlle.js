@@ -27,7 +27,7 @@ module.exports = {
      
         const {valor,email_ong, } = request.body;
       
-        const password = bcrypt.hashSync(request.body.password, 10)
+        
 
       const result = await conection('doacao').insert({
           valor,

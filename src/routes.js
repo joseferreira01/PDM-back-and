@@ -40,14 +40,14 @@ routes.post('/ong',celebrate({
     [Segments.BODY]: Joi.object().keys({
         nome: Joi.string().required().min(5).max(50),
         email: Joi.string().required().email(),
-        senha: Joi.string().required().min(8).max(16),
         telefone: Joi.string().required().min(11).max(11),
         descricao: Joi.string().required().min(10).max(100),
         uf: Joi.string().required().min(2).max(2),
         rua: Joi.string().required().min(2).max(40),
         bairro: Joi.string().required().min(5),
         cidade: Joi.string().required().min(5),
-        numero: Joi.number().integer().required()
+        numero: Joi.number().integer().required(),
+        senha: Joi.string().min(6).max(16)
 
     })
 }),ongController.create);

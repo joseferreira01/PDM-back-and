@@ -6,6 +6,7 @@ const userController = require('./controller/UserController')
 const ongController = require('./controller/ongController')
 const login = require('../src/ middleware/login');
 const sessions = require('./controller/sessions')
+const doacao = require('./controller/DoacaoControlle')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 
 const routes = express.Router();
@@ -37,26 +38,38 @@ routes.get('/usuario/:email',userController.findOne);
 
 routes.post('/ong',celebrate({
     [Segments.BODY]: Joi.object().keys({
-        name: Joi.string().required().min(5).max(50),
+        nome: Joi.string().required().min(5).max(50),
         email: Joi.string().required().email(),
         telefone: Joi.string().required().min(11).max(11),
         descricao: Joi.string().required().min(10).max(100),
         uf: Joi.string().required().min(2).max(2),
-        bairro: Joi.string().required().min(5),
-        rua: Joi.string().required().min(1).max(50),
+        rua: Joi.string().required().min(2).max(40),
+        bairo: Joi.string().required().min(5),
         cidade: Joi.string().required().min(5),
-        numero: Joi.number().integer().required(),
-        senha: Joi.string().required().min(8).max(16)
+        numero: Joi.number().integer().required()
     })
 }),ongController.create);
 
 routes.post('/ong/login',celebrate({
 
     [Segments.BODY]: Joi.object().keys({
+        senha: Joi.string().required().min(8).max(16),
         email: Joi.string().required(),
-        senha: Joi.string().required().min(8).max(16)        
       
     })
 }),sessions.loginOng);
+
+// rotas de doação r rr
+
+routes.post('/doacao',celebrate({
+
+    [Segments.BODY]: Joi.object().keys({
+        valor: Joi.number().required(),
+        email_ong: Joi.string().required().email(),
+      
+    })
+}),doacao.create);
+
+
 
 module.exports = routes;

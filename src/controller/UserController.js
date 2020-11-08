@@ -42,6 +42,18 @@ module.exports = {
    
      
     },
+    async atualizar(request,response, next){
+        const {nome,email,telefone} = request.body;
+
+        const senha = bcrypt.hashSync(request.body.senha, 10)
+
+        const result = await conection('usuario').where('email', email).update([{
+          nome : nome,
+          telefone : telefone,
+          email : email,
+          senha : senha
+        }])
+    },
     async delete(request, response, next){
        
             const id = request.params;

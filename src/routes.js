@@ -30,6 +30,18 @@ routes.post('/usuario',celebrate({
       
     })
 }),userController.create);
+
+routes.post('/usuario/editar',celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        nome: Joi.string().required().min(4).max(60),
+        telefone: Joi.string().required().min(4).max(60),
+        email: Joi.string().required().email(),
+        senha: Joi.string().required().min(8).max(16),
+     
+      
+    })
+}),userController.atualizar);
+
 routes.get('/usuario',userController.index);
 
 routes.get('/usuario/:email',userController.findOne);

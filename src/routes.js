@@ -53,8 +53,8 @@ routes.post('/ong',celebrate({
 routes.post('/ong/login',celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        senha: Joi.string().required().min(8).max(16),
         email: Joi.string().required(),
+        senha: Joi.string().required().min(8).max(16)        
       
     })
 }),sessions.loginOng);

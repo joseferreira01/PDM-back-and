@@ -1,5 +1,5 @@
 const conection = require('../database/conection');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 
 module.exports = {
@@ -27,7 +27,6 @@ module.exports = {
      
         const {valor,email_ong, } = request.body;
       
-        const password = bcrypt.hashSync(request.body.password, 10)
 
       const result = await conection('doacao').insert({
           valor,

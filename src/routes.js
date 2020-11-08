@@ -59,6 +59,8 @@ routes.post('/ong',celebrate({
         bairro: Joi.string().required().min(5),
         cidade: Joi.string().required().min(5),
         numero: Joi.number().integer().required(),
+        caixa_postal: Joi.string().required().min(4),
+        cep: Joi.string().required().min(9).max(9),
         senha: Joi.string().min(6).max(16)
 
     })

@@ -27,7 +27,7 @@ module.exports = {
 
     async create(request, response){
      
-      const { nome, email,telefone, descricao, uf,bairro,rua,cidade,numero} = request.body;
+      const { nome, email,telefone, descricao, uf,bairro,rua,cidade,numero,caixa_postal,cep} = request.body;
       const senha = bcrypt.hashSync(request.body.senha, 10)
       const result = await conection('ong').insert([{
         nome,
@@ -39,6 +39,8 @@ module.exports = {
          rua,
          cidade,
          numero,
+         caixa_postal,
+         cep,
          senha
         }]).then(message =>{
           return  response.status(200).json({success:'success'});

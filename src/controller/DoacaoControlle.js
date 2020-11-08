@@ -25,7 +25,7 @@ module.exports = {
 
     async create(request, response, next){
      
-        const {valor,email_ong, email_usuario } = request.body;
+        const {valor,email_ong, } = request.body;
       
         const password = bcrypt.hashSync(request.body.password, 10)
 

@@ -2,7 +2,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('doacao', function (table) {
         table.increments()
-        table.string('valor').notNullable();
+        table.decimal('valor');
         table.string('email_ong').notNullable();
         table.foreign('email_ong').references('ong.email')
     })

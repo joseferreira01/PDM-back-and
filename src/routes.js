@@ -42,17 +42,19 @@ routes.post('/ong',celebrate({
         telefone: Joi.string().required().min(11).max(11),
         descricao: Joi.string().required().min(10).max(100),
         uf: Joi.string().required().min(2).max(2),
-        bairo: Joi.string().required().min(5),
+        bairro: Joi.string().required().min(5),
+        rua: Joi.string().required().min(1).max(50),
         cidade: Joi.string().required().min(5),
-        numero: Joi.number().integer().required()
+        numero: Joi.number().integer().required(),
+        senha: Joi.string().required().min(8).max(16)
     })
 }),ongController.create);
 
 routes.post('/ong/login',celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        senha: Joi.string().required().min(8).max(16),
         email: Joi.string().required(),
+        senha: Joi.string().required().min(8).max(16)        
       
     })
 }),sessions.loginOng);

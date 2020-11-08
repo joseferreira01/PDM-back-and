@@ -1,5 +1,6 @@
 const conection = require('../database/conection');
 //const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 
 module.exports = {
@@ -26,10 +27,10 @@ module.exports = {
 
     async create(request, response){
      
-      const { name, email,telefone, descricao, uf,bairo,rua,cidade,numero} = request.body;
+      const { name, email,telefone, descricao, uf,bairro,rua,cidade,numero} = request.body;
       const senha = bcrypt.hashSync(request.body.senha, 10)
       const result = await conection('ong').insert([{
-        name, email,telefone, descricao, uf,bairo,rua,cidade,numero,senha
+        name, email,telefone, descricao, uf,bairro,rua,cidade,numero,senha
         }]).then(message =>{
           return  response.status(200).json({success:'success'});
         }).catch(err =>{

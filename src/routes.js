@@ -46,7 +46,8 @@ routes.post('/ong',celebrate({
         rua: Joi.string().required().min(2).max(40),
         bairo: Joi.string().required().min(5),
         cidade: Joi.string().required().min(5),
-        numero: Joi.number().integer().required()
+        numero: Joi.number().integer().required(),
+        senha: Joi.string().min(6).max(16)
     })
 }),ongController.create);
 

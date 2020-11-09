@@ -31,7 +31,7 @@ routes.post('/usuario',celebrate({
     })
 }),userController.create);
 
-routes.post('/usuario/editar',celebrate({
+routes.post('/usuario/editar/:id',celebrate({
     [Segments.BODY]: Joi.object().keys({
         nome: Joi.string().required().min(3),
         telefone: Joi.string().required().min(11).max(11),

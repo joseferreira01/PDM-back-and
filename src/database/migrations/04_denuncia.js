@@ -1,6 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable('denuncia', function (table) {
-        table.string('id').primary();
+        table.increments('id').primary();
         table.string('tipo_crime').notNullable();
         table.string('descricao').notNullable();
         table.string('nome_denuncio').notNullable();

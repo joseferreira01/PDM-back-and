@@ -9,7 +9,9 @@ exports.up = function(knex) {
         table.string('bairro').notNullable();
         table.string('rua').notNullable();
         table.string('cidade').notNullable();
-        table.integer('numero').notNullable()
+        table.integer('numero').notNullable();
+        table.string('caixa_postal');
+        table.string('cep');
     })
   };
   

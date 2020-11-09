@@ -23,7 +23,7 @@ routes.post('/usuario/login',celebrate({
 routes.post('/usuario',celebrate({
     [Segments.BODY]: Joi.object().keys({
         nome: Joi.string().required().min(4).max(60),
-        telefone: Joi.string().required().min(4).max(60),
+        telefone: Joi.string().required().min(11).max(11),
         email: Joi.string().required().email(),
         senha: Joi.string().required().min(8).max(16),
      
@@ -33,11 +33,10 @@ routes.post('/usuario',celebrate({
 
 routes.post('/usuario/editar',celebrate({
     [Segments.BODY]: Joi.object().keys({
-        nome: Joi.string().required().min(4).max(60),
-        telefone: Joi.string().required().min(4).max(60),
+        nome: Joi.string().required().min(3),
+        telefone: Joi.string().required().min(11).max(11),
         email: Joi.string().required().email(),
         senha: Joi.string().required().min(8).max(16),
-     
       
     })
 }),userController.atualizar);

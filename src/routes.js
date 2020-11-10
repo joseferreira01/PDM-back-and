@@ -80,7 +80,7 @@ routes.post('/doacao',celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         valor: Joi.number().required(),
-        email_ong: Joi.string().required().email(),
+        id_ong: Joi.string().required().email(),
       
     })
 }),doacao.create);

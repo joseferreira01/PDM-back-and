@@ -74,6 +74,8 @@ routes.post('/ong/login',celebrate({
     })
 }),sessions.loginOng);
 
+routes.get('/ong',ongController.index);
+
 // rotas de doação r rr
 
 routes.post('/doacao',celebrate({

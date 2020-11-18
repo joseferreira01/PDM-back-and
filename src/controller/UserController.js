@@ -38,19 +38,26 @@ module.exports = {
         
 
         const senha = bcrypt.hashSync(request.body.senha, 10)
-
-        const result = await conection('usuario').where('email', email).update([{
+        const {id} =  request.params;
+        
+        const result = await conection('usuario').where('id', id).update({
           nome : nome,
           telefone : telefone,
-          email : email,
-          senha : senha
-        }])
+          senha : senha,
+          email : email
+        },['nome','telefone','senha','email']).then(message => {
+
+          return  response.status(200).json({success:'success'});
+
+        }).catch(err =>{
+          return  response.status(404).json({err:err});
+        });
     },
     async delete(request, response, next){
        
             const id = request.params;
       
-            await conection('usuario').where('email',email)
+            await conection('usuario').where('id',id)
             .delete().then(message => {
 
               return  response.status(200).json({success:'success'});

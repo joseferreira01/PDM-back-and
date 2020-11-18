@@ -12,7 +12,7 @@ module.exports = {
         
        const message = await conection('doacao').limit(10).
        offset((page -1)*10).
-       select('id','email_ong', 'valor');
+       select('id','id_ong', 'valor');
        response.header('X-Total-Count',count['count(*)']);
         response.json({message})
     },
@@ -25,11 +25,11 @@ module.exports = {
 
     async create(request, response, next){
      
-        const {valor,email_ong, } = request.body;
+        const {valor,id_ong, } = request.body;
 
       const result = await conection('doacao').insert({
           valor,
-          email_ong
+          id_ong
         }).then(message =>{
           return  response.status(200).json({success:'success'});
         }).catch(err =>{

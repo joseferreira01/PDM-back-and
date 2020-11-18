@@ -24,7 +24,7 @@ routes.post('/usuario/login',celebrate({
 routes.post('/usuario',celebrate({
     [Segments.BODY]: Joi.object().keys({
         nome: Joi.string().required().min(4).max(60),
-        telefone: Joi.string().required().min(4).max(60),
+        telefone: Joi.string().required().min(11).max(11),
         email: Joi.string().required().email(),
         senha: Joi.string().required().min(8).max(16),
      
@@ -32,13 +32,12 @@ routes.post('/usuario',celebrate({
     })
 }),userController.create);
 
-routes.post('/usuario/editar',celebrate({
+routes.post('/usuario/editar/:id',celebrate({
     [Segments.BODY]: Joi.object().keys({
-        nome: Joi.string().required().min(4).max(60),
-        telefone: Joi.string().required().min(4).max(60),
+        nome: Joi.string().required().min(3),
+        telefone: Joi.string().required().min(11).max(11),
         email: Joi.string().required().email(),
         senha: Joi.string().required().min(8).max(16),
-     
       
     })
 }),userController.atualizar);
@@ -66,6 +65,8 @@ routes.post('/ong',celebrate({
         bairro: Joi.string().required().min(5),
         cidade: Joi.string().required().min(5),
         numero: Joi.number().integer().required(),
+        caixa_postal: Joi.string().required().min(4),
+        cep: Joi.string().required().min(9).max(9),
         senha: Joi.string().min(6).max(16)
 
     })
@@ -80,13 +81,15 @@ routes.post('/ong/login',celebrate({
     })
 }),sessions.loginOng);
 
+routes.get('/ong',ongController.index);
+
 // rotas de doação r rr
 
 routes.post('/doacao',celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         valor: Joi.number().required(),
-        email_ong: Joi.string().required().email(),
+        id_ong: Joi.string().required().email(),
       
     })
 }),doacao.create);

@@ -1,6 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable('denuncia', function (table) {
-        table.string('id').primary();
+        table.increments('id').primary();
         table.string('tipo_crime').notNullable();
         table.string('descricao').notNullable();
         table.string('nome_denuncio').notNullable();
@@ -10,10 +10,10 @@ exports.up = function(knex) {
         table.string('rua').notNullable();
         table.string('cidade').notNullable();
         table.string('numero').notNullable();
-        table.string('usuario_email').notNullable();
-        table.string('ong_email').notNullable();
-        table.foreign('usuario_email').references('usuario.email');
-        table.foreign('ong_email').references('ong.email')
+        table.string('usuario_id').notNullable();
+        table.string('ong_id').notNullable();
+        table.foreign('usuario_id').references('usuario.id');
+        table.foreign('ong_id').references('ong.id')
     })
   };
   

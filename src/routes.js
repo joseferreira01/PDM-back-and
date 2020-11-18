@@ -8,6 +8,7 @@ const login = require('../src/ middleware/login');
 const sessions = require('./controller/sessions')
 const doacao = require('./controller/DoacaoControlle')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
+const UserController = require('./controller/UserController');
 
 const routes = express.Router();
 
@@ -44,8 +45,14 @@ routes.post('/usuario/editar',celebrate({
 
 routes.get('/usuario',userController.index);
 
-routes.get('/usuario/:email',userController.findOne);
+routes.get('/usuario/:id',userController.findOne);
 
+routes.delete('usuario/:id',celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().required(),
+      
+    })
+}),UserController.delete);
 
 
 routes.post('/ong',celebrate({

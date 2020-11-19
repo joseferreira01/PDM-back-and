@@ -21,7 +21,7 @@ module.exports = {
       
         const usuario = await UserRepository.findOne(email)
        
-        if(! usario){
+        if(! usuario){
             console.log('no if')
             return 500;
         } else{ 

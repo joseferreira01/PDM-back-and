@@ -8,6 +8,7 @@ const login = require('../src/ middleware/login');
 const sessions = require('./controller/sessions')
 const doacao = require('./controller/DoacaoControlle')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
+const denunciaController = require('./controller/DenunciaController');
 
 const routes = express.Router();
 
@@ -86,5 +87,47 @@ routes.post('/doacao',celebrate({
 }),doacao.create);
 
 
+//Rotas denuncia
+
+routes.get('/denuncia',denunciaController.index);
+
+routes.get('/denuncia/:id',denunciaController.findOneId);
+
+routes.post('/denuncia',celebrate({
+
+    [Segments.BODY]: Joi.object().keys({
+        tipo_crime: Joi.string().required().min(8).max(50),
+        descricao: Joi.string().required().min(20).max(150),
+        nome_denuncio: Joi.string().required().min(10).max(100),
+        localizao: Joi.string().required().min(5).max(15),
+        uf: Joi.string().required().min(2).max(20), 
+        bairo: Joi.string().required().min(5).max(20),
+        rua: Joi.string().required().min(5).max(20), 
+        cidade: Joi.string().required().min(5).max(20),
+        numero: Joi.number().integer().required(),
+        usuario_email: Joi.string().required().min(10).max(50), 
+        ong_email: Joi.string().required().min(5).max(20),
+      
+    })
+}),denunciaController.create);
+
+routes.post('/denuncia/editar/:id',celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        tipo_crime: Joi.string().required().min(8).max(50),
+        descricao: Joi.string().required().min(20).max(150),
+        nome_denuncio: Joi.string().required().min(10).max(100),
+        localizao: Joi.string().required().min(5).max(15),
+        uf: Joi.string().required().min(2).max(20), 
+        bairo: Joi.string().required().min(5).max(20),
+        rua: Joi.string().required().min(5).max(20), 
+        cidade: Joi.string().required().min(5).max(20),
+        numero: Joi.number().integer().required(),
+        usuario_email: Joi.string().required().min(10).max(50), 
+        ong_email: Joi.string().required().min(5).max(20),
+      
+    })
+}),denunciaController.update);
+
+routes.get('/denuncia/delete/:id',denunciaController.delete);
 
 module.exports = routes;

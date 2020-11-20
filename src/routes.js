@@ -6,7 +6,6 @@ const userController = require('./controller/UserController')
 const ongController = require('./controller/ongController')
 const login = require('../src/ middleware/login');
 const sessions = require('./controller/sessions');
-const PerfilUsuario = require('./controller/PerfilUsusario');
 const doacao = require('./controller/DoacaoControlle')
 const { celebrate, Joi, errors, Segments } = require('celebrate');
 const UserController = require('./controller/UserController');

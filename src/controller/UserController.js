@@ -12,7 +12,7 @@ module.exports = {
         const {page = 1} = request.query;
       const dados = await UseService.index(page);
    
-        response.json(dados.usuario);
+        response.json(dados);
     },
     async findOne(request, response,next){
       const {id} = request.params;
@@ -38,7 +38,7 @@ module.exports = {
         
 
         const senha = bcrypt.hashSync(request.body.senha, 10)
-        const {id} =  request.params;
+        
         
         const result = await conection('usuario').where('id', id).update({
           nome : nome,

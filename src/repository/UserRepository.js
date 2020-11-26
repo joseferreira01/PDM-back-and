@@ -42,6 +42,7 @@ module.exports = {
        
          return result;
         },
+
         async atualizar(dados){
             const {nome,email,telefone} = dados;
             console.log('metodo atualixar body', dados);
@@ -53,11 +54,8 @@ module.exports = {
               telefone : telefone,
               email : email,
               senha : senha
-            }]).then(message =>{
-                return  200;
-              }).catch(err =>{
-                return  500;
-              });
+            }]);
+            return result;
         },
         async delete(id){
             console.log('metodo delete', id);

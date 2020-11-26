@@ -3,10 +3,12 @@ exports.up = function(knex) {
         table.increments('id').primary();
         table.string('tipo_crime').notNullable();
         table.string('descricao').notNullable();
-        table.string('nome_denuncio').notNullable();
-        table.string('localizao').notNullable();
+        table.string('titulo').notNullable();
+        table.string('status').notNullable();
+        table.string('latitude').notNullable();
+        table.string('longitude').notNullable();
         table.string('uf').notNullable();
-        table.string('bairo').notNullable();
+        table.string('bairro').notNullable();
         table.string('rua').notNullable();
         table.string('cidade').notNullable();
         table.string('numero').notNullable();

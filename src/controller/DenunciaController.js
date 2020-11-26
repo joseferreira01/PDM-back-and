@@ -11,7 +11,7 @@ module.exports = {
         
        const denuncia = await conection('denuncia').limit(10).
        offset((page -1)*10).
-       select('tipo_crime','descricao','nome_denuncio');
+       select('*');
        response.header('X-Total-Count',count['count(*)']);
         response.json({denuncia})
     },
@@ -24,32 +24,37 @@ module.exports = {
 
 
     async create(request, response, next){
-     
-        const { tipo_crime, descricao, nome_denuncio, localizao, uf, bairo, rua, cidade, numero, usuario_email, ong_email } = request.body;
+        const status ="analisando";
+        const { tipo_crime, descricao, titulo, latitude,longitude, uf, bairro, rua, cidade, numero, usuario_id, ong_id } = request.body;
 
-        const result = await conection('denuncia').insert([{
+        const result = await conection('denuncia').insert({
             tipo_crime,
             descricao,
-            nome_denuncio,
-            localizao,
+            titulo,
+            latitude,
+            longitude,
             uf, 
-            bairo,
+            bairro,
             rua, 
             cidade, 
             numero, 
-            usuario_email, 
-            ong_email
+            usuario_id, 
+            ong_id,
+            status
             
-            }]).then(message =>{
+            })
+            
+            if(result){
             return  response.status(200).json({success:'success'});
-            }).catch(err =>{
-            return  response.status(201).json({error:err});
-            });
+            }else{
+              
+            return  response.status(201).json({error:'error'});
+            };
     
         
         },
     async update(request,response, next){
-        const {tipo_crime, descricao, nome_denuncio, localizao, uf, bairo, rua, cidade, numero, usuario_email, ong_email } = request.body;
+        const {tipo_crime, descricao, nome_denuncio, localizao, uf, bairo, rua, cidade, numero, usuario_email, ong_id } = request.body;
         const {id} =  request.params;
         
         const result = await conection('denuncia').where('id', id).update({
@@ -62,9 +67,9 @@ module.exports = {
             rua:rua,
             cidade:cidade,
             numero:numero,  
-            usuario_email:usuario_email, 
-            ong_email:ong_email
-        },['tipo_crime', 'descricao', 'nome_denuncio', 'localizacao', 'uf', 'bairo', 'rua', 'cidade', 'numero', 'usuario_email', 'ong_email']).then(message => {
+            usuario_id:usuario_id, 
+            ong_id:ong_id,
+        },['tipo_crime', 'descricao', 'nome_denuncio', 'localizacao', 'uf', 'bairo', 'rua', 'cidade', 'numero', 'usuario_id', 'ong_id']).then(message => {
 
           return  response.status(200).json({success:'success'});
 

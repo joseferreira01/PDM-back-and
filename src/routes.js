@@ -1,6 +1,8 @@
 const express = require('express');
 
 const contact = require('./controller/ongController')
+const multer = require('multer')
+const multerConfig = require('./config/multer')
 
 const userController = require('./controller/UserController')
 const ongController = require('./controller/ongController')
@@ -102,25 +104,26 @@ routes.get('/denuncia',denunciaController.index);
 
 routes.get('/denuncia/:id',denunciaController.findOneId);
 
-routes.post('/denuncia',celebrate({
+routes.post('/denuncia',multer().single('imagens'),celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        tipo_crime: Joi.string().required().min(8).max(50),
+        tipo_crime: Joi.string().required().min(3).max(50),
         descricao: Joi.string().required().min(20).max(150),
-        nome_denuncio: Joi.string().required().min(10).max(100),
-        localizao: Joi.string().required().min(5).max(15),
+        titulo: Joi.string().required().min(10).max(100), 
+        latitude: Joi.string().required().min(5).max(15),
+        longitude: Joi.string().required().min(5).max(15),
         uf: Joi.string().required().min(2).max(20), 
-        bairo: Joi.string().required().min(5).max(20),
-        rua: Joi.string().required().min(5).max(20), 
+        bairro: Joi.string().required().min(5).max(20),
+        rua: Joi.string().required().min(5).max(20),
         cidade: Joi.string().required().min(5).max(20),
         numero: Joi.number().integer().required(),
-        usuario_email: Joi.string().required().min(10).max(50), 
-        ong_email: Joi.string().required().min(5).max(20),
+        usuario_id: Joi.number().integer().required(),
+        ong_id: Joi.number().integer().required(),
       
     })
 }),denunciaController.create);
 
-routes.post('/denuncia/editar/:id',celebrate({
+routes.put('/denuncia/:id',celebrate({
     [Segments.BODY]: Joi.object().keys({
         tipo_crime: Joi.string().required().min(8).max(50),
         descricao: Joi.string().required().min(20).max(150),
@@ -137,6 +140,11 @@ routes.post('/denuncia/editar/:id',celebrate({
     })
 }),denunciaController.update);
 
-routes.get('/denuncia/delete/:id',denunciaController.delete);
+routes.delete('/denuncia/:id',denunciaController.delete);
+
+routes.post('/teste',multer().single('imagens'), (req,res) =>{
+
+    console.log(req.file);
+});
 
 module.exports = routes;

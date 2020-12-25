@@ -26,8 +26,10 @@ module.exports = {
     async create(request, response, next){
         const status ="analisando";
         console.log('uploads img',request.file);
+        const foto = 'http://192.168.0.103/tmp/uploads/'+ request.file.filename;
+        console.log('caminho da ing',foto);
         const { tipo_crime, descricao, titulo, latitude,longitude, uf, bairro, rua, cidade, numero, usuario_id, ong_id } = request.body;
-        console.log('mais infos ',tipo_crime,titulo,descricao);
+      //  console.log('mais infos ',tipo_crime,titulo,descricao);
         const result = await conection('denuncia').insert({
             tipo_crime,
             descricao,
@@ -41,7 +43,8 @@ module.exports = {
             numero, 
             usuario_id, 
             ong_id,
-            status
+            status,
+            foto
             
             })
             

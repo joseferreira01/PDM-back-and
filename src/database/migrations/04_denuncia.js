@@ -10,6 +10,7 @@ exports.up = function(knex) {
         table.string('uf').notNullable();
         table.string('bairro').notNullable();
         table.string('rua').notNullable();
+        table.string('foto').notNullable();
         table.string('cidade').notNullable();
         table.integer('numero').notNullable();
         table.integer('usuario_id').notNullable();

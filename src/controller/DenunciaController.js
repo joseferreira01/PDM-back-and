@@ -13,18 +13,19 @@ module.exports = {
        offset((page -1)*10).
        select('*');
        response.header('X-Total-Count',count['count(*)']);
-        response.json({denuncia})
+        response.json(denuncia)
     },
     async findOneId(request, response,next){
         const {id} =  request.params;
         const denuncia = await conection('denuncia').
         where('id',id).select('tipo_crime','descricao','nome_denuncio');
-         response.json({denuncia})
+         response.json(denuncia)
      },
 
 
     async create(request, response, next){
         const status ="analisando";
+        console.log('uploads img',request.file);
         const { tipo_crime, descricao, titulo, latitude,longitude, uf, bairro, rua, cidade, numero, usuario_id, ong_id } = request.body;
 
         const result = await conection('denuncia').insert({

@@ -11,9 +11,9 @@ exports.up = function(knex) {
         table.string('bairro').notNullable();
         table.string('rua').notNullable();
         table.string('cidade').notNullable();
-        table.string('numero').notNullable();
-        table.string('usuario_id').notNullable();
-        table.string('ong_id').notNullable();
+        table.integer('numero').notNullable();
+        table.integer('usuario_id').notNullable();
+        table.integer('ong_id').notNullable();
         table.foreign('usuario_id').references('usuario.id');
         table.foreign('ong_id').references('ong.id')
     })

@@ -27,10 +27,10 @@ module.exports = {
     }, 
     fileFilter: (req, res, cb) => {
         const allowedMimes = [
-            'images/jpeg',
-            'images/pjpeg',
-            'images/png',
-            'images/gif'
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/gif'
         ]
          if(allowedMimes.includes(file.mimetype)){
              cb(null,true);

@@ -104,7 +104,7 @@ routes.get('/denuncia',denunciaController.index);
 
 routes.get('/denuncia/:id',denunciaController.findOneId);
 
-routes.post('/denuncia',multer().single('imagens'),celebrate({
+routes.post('/denuncia',multer(multerConfig).single('imagens'),celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         tipo_crime: Joi.string().required().min(3).max(50),

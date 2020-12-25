@@ -27,7 +27,7 @@ module.exports = {
         const status ="analisando";
         console.log('uploads img',request.file);
         const { tipo_crime, descricao, titulo, latitude,longitude, uf, bairro, rua, cidade, numero, usuario_id, ong_id } = request.body;
-
+        console.log('mais infos ',tipo_crime,titulo,descricao);
         const result = await conection('denuncia').insert({
             tipo_crime,
             descricao,

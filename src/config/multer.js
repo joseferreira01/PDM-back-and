@@ -25,15 +25,5 @@ module.exports = {
     limits: {
         fileSize: 5 * 1024 *1024, 
     }, 
-    fileFilter: (req, res, cb) => {
-        const allowedMimes = [
-            'image/jpeg',
-            'image/pjpeg',
-            'image/png',
-            'image/gif'
-        ]
-         if(allowedMimes.includes(file.mimetype)){
-             cb(null,true);
-         }else cb(new Error('A imagem tem que ser no formato correto (jpeg, pjpeg, png ou gig )'))
-    },
+    
 };

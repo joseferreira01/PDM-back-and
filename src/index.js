@@ -1,12 +1,15 @@
 const express = require('express');
 const routes = require('./routes');
 const { errors } = require('celebrate');
+const { use } = require('./routes');
 const PORT = process.env.PORT || 3333;
+const path = require('path')
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
+app.use('uploads',express.static(path.join(__dirname,'..','uploads')))
 // para carregar arquivos
 //app.use (bodyParser.json ({limit: '10mb', extended: true}))
 

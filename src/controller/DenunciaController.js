@@ -26,7 +26,8 @@ module.exports = {
     async create(request, response, next){
         const status ="analisando";
         console.log('uploads img',request.file);
-        const foto = 'http://192.168.0.103:3333/tmp/uploads/'+ request.file.filename;
+        const foto = 'http://192.168.0.103:3333/uploads/'+ request.file.filename;
+        
         console.log('caminho da ing',foto);
         const { tipo_crime, descricao, titulo, latitude,longitude, uf, bairro, rua, cidade, numero, usuario_id, ong_id } = request.body;
       //  console.log('mais infos ',tipo_crime,titulo,descricao);

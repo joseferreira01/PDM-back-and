@@ -18,7 +18,7 @@ module.exports = {
     async findOneId(request, response,next){
         const {id} =  request.params;
         const denuncia = await conection('denuncia').
-        where('id',id).select('tipo_crime','descricao','nome_denuncio');
+        where('id',id).select('*');
          response.json(denuncia)
      },
 

@@ -7,7 +7,7 @@ const { findOne } = require("../controller/ongController")
 
 
 module.exports = {
-    dest: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
+    dest: path.resolve(__dirname, '..', '..', 'uploads'),
     storage: multer.diskStorage({
 
         destination: (req, file, cb) => {

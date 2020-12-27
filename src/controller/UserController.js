@@ -15,9 +15,10 @@ module.exports = {
         response.json(dados);
     },
     async findOne(request, response,next){
-      const {id} = request.params;
-      const dados = UseService.findOne(id);
-       response.json(dados['usuario']);
+      const {id} =  request.params;
+      const dusuario = await conection('usuario').
+      where('id',id).select('id','nome','email','telefone');
+       response.json(dusuario)
      },
 
     async create(request, response, next){

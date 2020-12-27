@@ -9,7 +9,7 @@ module.exports = {
             
            const usuario = await conection('usuario').limit(10).
            offset((page -1)*10).
-           select('id','email','telefone');
+           select('id','nome','email','telefone');
 
             let dados = {'usuario':usuario, 
                'count': count['count(*)']};

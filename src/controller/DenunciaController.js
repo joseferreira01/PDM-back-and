@@ -1,6 +1,6 @@
 const conection = require('../database/conection');
 const bcrypt = require('bcrypt');
-
+const dataAtualFormatada = require('../utios/util')
 
 module.exports = {
   
@@ -24,6 +24,9 @@ module.exports = {
 
 
     async create(request, response, next){
+      
+      var date = new Date();
+      const data = date.getDay()+'/'+(date.getMonth()+1) +'/'+date.getFullYear();
         const status ="analisando";
         console.log('uploads img',request.file);
         const foto = `http://192.168.0.103:3333/uploads/${request.file.filename}`;
@@ -45,7 +48,8 @@ module.exports = {
             usuario_id, 
             ong_id,
             status,
-            foto
+            foto,
+            data
             
             })
             
@@ -97,5 +101,13 @@ module.exports = {
 
           
     },
+    dataAtualFormatada(){
+      var data = new Date(),
+        dia  = data.getDate().toString().padStart(2, '0'),
+        mes  = (data.getMonth()+1).toString().padStart(2, '0'), //+1 pois no getMonth Janeiro começa com zero.
+        ano  = data.getFullYear();
+        return dia+"/"+mes+"/"+ano;
+    }
+    
     
 };

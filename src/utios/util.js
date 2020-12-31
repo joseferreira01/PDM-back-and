@@ -1,7 +1,7 @@
 module.exports={
 
-    async dataAtualFormatada(){
-    var data = new Date(),
+    async dataAtualFormatada(data){
+   
         dia  = data.getDate().toString(),
         diaF = (dia.length == 1) ? '0'+dia : dia,
         mes  = (data.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.

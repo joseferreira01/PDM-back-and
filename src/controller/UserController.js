@@ -24,9 +24,12 @@ module.exports = {
     async create(request, response, next){
      
      const resutado = await UseService.create( request.body);
+     const {email} = request.body;
      console.log('log de create',resutado)
       if(resutado){
-        response.status(200).json({success:'sucesso'});
+        const usuario = await conection('usuario').
+        where('email',email).select('id','nome');
+      await  response.status(200).json(usuario[0]);
       } else {
         response.status(400).json({error:'erro'});
       }
@@ -69,5 +72,6 @@ module.exports = {
 
           
     },
+    
     
 };

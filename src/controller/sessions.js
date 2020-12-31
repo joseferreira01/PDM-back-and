@@ -12,7 +12,7 @@ module.exports = {
             const usuario = await conection('usuario')
                 .where({
                     email: email,
-                }).select('email', 'senha');
+                }).select('*');
 
             if (!usuario) {
                 throw new Error('Incorrect email')
@@ -21,14 +21,16 @@ module.exports = {
             const isSamePassword = await bcrypt.compare(senha, usuario[0].senha)
 
             if (isSamePassword) {
+                
                 const token = jwt.sign({
                     email: usuario.email,
                    
                 }, 'dados', {
                     expiresIn: '1h'
                 })
+             const  {id}= usuario;
 
-                return response.json(token);
+                return response.json(usuario);
             }
             throw new Error('Incorrect senha')
         } catch (err) {

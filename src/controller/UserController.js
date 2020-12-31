@@ -28,7 +28,7 @@ module.exports = {
      console.log('log de create',resutado)
       if(resutado){
         const usuario = await conection('usuario').
-        where('email',email).select('id','nome');
+        where('email',email).select('id');
       await  response.status(200).json(usuario[0]);
       } else {
         response.status(400).json({error:'erro'});

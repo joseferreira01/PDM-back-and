@@ -30,7 +30,7 @@ module.exports = {
                 })
              const  {id}= usuario;
 
-                return response.json(usuario);
+                return response.json(usuario[0]);
             }
             throw new Error('Incorrect senha')
         } catch (err) {

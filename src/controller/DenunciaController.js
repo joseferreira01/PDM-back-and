@@ -19,7 +19,7 @@ module.exports = {
         const {id} =  request.params;
         const denuncia = await conection('denuncia').
         where('id',id).select('*');
-         response.json(denuncia)
+         response.json(denuncia[0])
      },
 
 
@@ -29,7 +29,7 @@ module.exports = {
       const data = date.getDay()+'/'+(date.getMonth()+1) +'/'+date.getFullYear();
         const status ="analisando";
         console.log('uploads img',request.file);
-        const foto = `http://192.168.0.103:3333/uploads/${request.file.filename}`;
+        const foto = `http://192.168.10.23:3333/uploads/${request.file.filename}`;
         
         console.log('caminho da ing',foto);
         const { tipo_crime, descricao, titulo, latitude,longitude, uf, bairro, rua, cidade, numero, usuario_id, ong_id } = request.body;
